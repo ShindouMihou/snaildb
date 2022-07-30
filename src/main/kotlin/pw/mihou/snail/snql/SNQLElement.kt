@@ -49,7 +49,7 @@ interface SNQLElement<Self> {
                     temporaryHold += character
 
                     if (temporaryHold == "AND" && !insideQuotations && nestedObjects == 0 && nestedArrays == 0) {
-                        selections.add(temporarySelection.replace(" AND", "").trim())
+                        selections.add(temporarySelection.removePrefix("AND ").removeSuffix(" AND").trim())
                         temporaryHold = ""
                         temporarySelection = ""
                     }
