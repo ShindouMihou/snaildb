@@ -21,7 +21,7 @@ object QueryWarmup: Warmup {
         "(database=\"world\" AND collection=\"hello\" AND content=(message=\"It works!\" " +
                 "AND nested=(world=\"hello\" AND magic=[\"world\" AND \"hello\" AND 1 AND true AND false AND TRUE " +
                 "AND FALSE AND -1 AND 0.0 AND 0 AND 1.0 AND +1.0 AND (hello=\"world\") AND [\"hello\" AND \"world\"] " +
-                "AND (long)123 AND (int)123])))"
+                "AND 123L AND 123I])))"
     )
 
     override val name = "QUERY_WARMING"

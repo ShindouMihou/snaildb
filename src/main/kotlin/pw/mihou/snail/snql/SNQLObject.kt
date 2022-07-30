@@ -3,17 +3,18 @@ package pw.mihou.snail.snql
 import java.lang.IllegalArgumentException
 
 object SNQLObject: SNQLElement<Map<String, Any?>> {
-    override val REGEX = "^\\((?<object>.*)\\)\$".toRegex()
-
     override fun parse(selection: String): Map<String, Any?> {
         val selections = SNQLElement.split(selection)
         val element = mutableMapOf<String, Any?>()
 
-        selections.map { it.split("=", limit = 2) }.forEach { (key, value) ->
-            val valueMatcher = SNQLValue.REGEX.matchEntire(value.trim())
-                ?: throw IllegalArgumentException("SNQL cannot recognize selection as a value: $value")
+        @Suppress("NAME_SHADOWING")
+        for (selection in selections) {
+            val pair = selection.split('=', limit = 2)
 
-            element[key.trim()] = SNQLValue.parse(valueMatcher.groups["value"]!!.value)
+            if (pair.size < 2)
+                throw IllegalArgumentException("SNQL cannot consider the following selection as an object: $selection")
+
+            element[pair[0].trim()] = SNQLValue.parse(pair[1].trim())
         }
 
         return element

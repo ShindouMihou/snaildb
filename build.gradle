@@ -17,6 +17,7 @@ application {
 
 dependencies {
     implementation "io.javalin:javalin:4.6.4"
+    implementation "org.lz4:lz4-java:1.8.0"
     implementation "org.json:json:20220320"
     implementation "pw.mihou:Dotenv:1.0.1"
     implementation 'ch.qos.logback:logback-classic:1.2.11'

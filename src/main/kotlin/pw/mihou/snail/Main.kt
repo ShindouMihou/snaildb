@@ -1,5 +1,6 @@
 package pw.mihou.snail
 
+import org.json.JSONObject
 import pw.mihou.snail.http.handler.HttpAfterHandler
 import pw.mihou.snail.http.handler.HttpBeforeHandler
 import pw.mihou.snail.http.handler.HttpExceptionHandler

@@ -1,13 +1,19 @@
 package pw.mihou.snail.snql
 
 fun String.toSNQLObject(): Map<String, Any?>? {
-    val objectMatcher = SNQLObject.REGEX.matchEntire(this.trim()) ?: return null
-    return SNQLObject.parse(objectMatcher.groups["object"]!!.value)
+    if (startsWith('(') && endsWith(')')) {
+        return SNQLObject.parse(removeSurrounding("(", ")").trim())
+    }
+
+    return null
 }
 
 fun String.toSNQLArray(): List<Any?>? {
-    val arrayMatcher = SNQLArray.REGEX.matchEntire(this.trim()) ?: return null
-    return SNQLArray.parse(arrayMatcher.groups["array"]!!.value)
+    if (startsWith('[') && endsWith(']')) {
+        return SNQLArray.parse(removeSurrounding("[", "]").trim())
+    }
+
+    return null
 }
 
 fun List<*>.toSNQLString(): String = SNQLElement.stringify(this)

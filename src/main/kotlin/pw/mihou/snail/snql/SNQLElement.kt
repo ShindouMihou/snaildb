@@ -1,8 +1,6 @@
 package pw.mihou.snail.snql
 
 interface SNQLElement<Self> {
-    val REGEX: Regex
-
     fun parse(selection: String): Self?
 
     companion object {
@@ -34,11 +32,11 @@ interface SNQLElement<Self> {
                 }
 
                 if (value is Long) {
-                    return@joinToString "(long)$value"
+                    return@joinToString "$value" + "L"
                 }
 
                 if (value is Int) {
-                    return@joinToString "(int)$value"
+                    return@joinToString "$value" + "I"
                 }
 
                 return@joinToString value.toString()
@@ -66,11 +64,11 @@ interface SNQLElement<Self> {
                 }
 
                 if (value is Long) {
-                    return@map "$key=(long)$value"
+                    return@map "$key=$value" + "L"
                 }
 
                 if (value is Int) {
-                    return@map "$key=(int)$value"
+                    return@map "$key=$value" + "I"
                 }
 
                 return@map "$key=$value"

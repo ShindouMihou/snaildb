@@ -28,7 +28,7 @@ SNQL has a few very simple rules that can cause chaos like minified JSON and tha
 - The keyword AND (all capitalized) is reserved for delimiters e.g. in multi-attributed objects or arrays.
 - Objects must be wrapped in parenthesis (**(** and **)**) (e.g. `(hello="world" AND good="night")`).
 - Arrays must be wrapped in square brackets (**[** and **]**) (e.g. `(array=["hello" AND "world"])`).
-- Numbers can be typed with long (int64), int (int32) by writing the type before the number (e.g. `(number=(long)123)`).
+- Numbers can be typed with long (int64), int (int32) by writing the type (L for long, I for int, must be capital letters) after the number (e.g. `(number=123L)`).
 - Numbers can also be not typed with the parser determining which size is best between int64 and int32 (e.g. `(number=123)`).
 - Strings must be always enclosed in double quotations (e.g. `(hello="world")`).
 - Decimals cannot be like integers and must always have a penny (e.g. `(decimal=0.0)`).
