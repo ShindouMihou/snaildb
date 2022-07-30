@@ -56,8 +56,7 @@ on drivers or a generator inside to generate the SNQL for you since it will be a
 
 SnailDb is under development with no ETA or deadline in mind.
 - [x] Adds SNQL deserializer.
-- [ ] Adds support for SNQL to JSON.
-- [ ] Adds JSON data files to officially declare this a pseudo-database.
+- [ ] Adds SNQL data files to officially declare this a pseudo-database.
 - [ ] Adds operations such as INSERT, DELETE, UPDATE and GET with the use of SNQL.
 - [ ] Enforces authentication via the Authorization header in the format of `user@token`.
 - [ ] Adds support for indexing of data.
