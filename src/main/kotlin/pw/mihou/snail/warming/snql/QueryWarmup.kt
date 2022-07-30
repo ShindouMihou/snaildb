@@ -5,6 +5,8 @@ import pw.mihou.snail.logger.info
 import pw.mihou.snail.logger.objectsToJson
 import pw.mihou.snail.snql.toSNQLObject
 import pw.mihou.snail.warming.Warmup
+import java.text.NumberFormat
+import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
 
 object QueryWarmup: Warmup {
@@ -26,13 +28,15 @@ object QueryWarmup: Warmup {
 
     override operator fun invoke() {
         for (query in queries) {
-            val timeTaken = measureTimeMillis {
-                query.toSNQLObject()
-            }
+            val timeTaken = NumberFormat.getInstance().format(
+                measureNanoTime {
+                    query.toSNQLObject()
+                } / 1000
+            )
 
             SnailDb.LOGGER.info("event" to "APPLICATION_WARMING", "task" to objectsToJson(
                 "name" to "QUERY_WARMING",
-                "duration" to "$timeTaken milliseconds"
+                "duration" to "$timeTaken microseconds"
             ))
         }
     }
