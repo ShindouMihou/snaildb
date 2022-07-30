@@ -10,6 +10,9 @@ interface SNQLElement<Self> {
         fun map(vararg elements: Pair<String, Any?>): Map<String, Any?> = mapOf(*elements)
         fun array(vararg elements: Any?): List<Any?> = listOf(*elements)
 
+        private fun escape(contents: String) = contents.replace("\\\"", "\"")
+            .replace("\"", "\\\"")
+
         private fun destructure(array: List<Any?>): String {
             return array.joinToString(" AND ") { value ->
                 if (value is Map<*, *> && value.keys.all { it is String }) {
@@ -27,7 +30,7 @@ interface SNQLElement<Self> {
                 }
 
                 if (value is String) {
-                    return@joinToString "\"$value\""
+                    return@joinToString "\"${escape(value)}\""
                 }
 
                 if (value is Long) {
@@ -59,7 +62,7 @@ interface SNQLElement<Self> {
                 }
 
                 if (value is String) {
-                    return@map "$key=\"$value\""
+                    return@map "$key=\"${escape(value)}\""
                 }
 
                 if (value is Long) {
