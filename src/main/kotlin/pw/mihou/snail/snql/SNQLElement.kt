@@ -6,6 +6,7 @@ interface SNQLElement<Self> {
     fun parse(selection: String): Self?
 
     companion object {
+
         fun split(selection: String): List<String> {
             val selections = mutableListOf<String>()
 
@@ -22,11 +23,11 @@ interface SNQLElement<Self> {
                     insideQuotations = !insideQuotations
                 }
 
-                if (character == '{' && !insideQuotations) {
+                if (character == '(' && !insideQuotations) {
                     nestedObjects++
                 }
 
-                if (character == '}' && !insideQuotations) {
+                if (character == ')' && !insideQuotations) {
                     nestedObjects--
                 }
 
@@ -48,7 +49,7 @@ interface SNQLElement<Self> {
                     temporaryHold += character
 
                     if (temporaryHold == "AND" && !insideQuotations && nestedObjects == 0 && nestedArrays == 0) {
-                        selections.add(temporarySelection.replaceFirst(" AND", "").trim())
+                        selections.add(temporarySelection.replace(" AND", "").trim())
                         temporaryHold = ""
                         temporarySelection = ""
                     }

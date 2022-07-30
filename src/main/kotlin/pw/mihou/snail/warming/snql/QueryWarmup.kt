@@ -10,12 +10,16 @@ import kotlin.system.measureTimeMillis
 object QueryWarmup: Warmup {
 
     private val queries = listOf(
-        "(hello={\"world\"})",
-        "(hello={\"world\"} AND good={\"bye\"})",
-        "(array={[{\"hello\"}]})",
-        "(database={\"world\"} AND collection={\"hello\"} AND content={(message={\"It works!\"} " +
-                "AND array={[{\"HELLO\"} AND {(nested={(world={\"hello\"} AND magic={[{\"world\"}]})})}]})})",
-        "(object_1={(hello={\"world\"})} AND object_2={(hello={\"world\"})} AND object_3={(hello={\"world\"})})"
+        "(hello=\"world\")",
+        "(hello=\"world\" AND good=\"bye\")",
+        "(array=[\"hello\"])",
+        "(database=\"world\" AND collection=\"hello\" AND content=(message=\"It works!\" AND array=[\"HELLO\" " +
+                "AND (nested=(world=\"hello\" AND magic=[\"world\"]))]))",
+        "(object_1=(hello=\"world\") AND object_2=(hello=\"world\") AND object_3=(hello=\"world\"))",
+        "(database=\"world\" AND collection=\"hello\" AND content=(message=\"It works!\" " +
+                "AND nested=(world=\"hello\" AND magic=[\"world\" AND \"hello\" AND 1 AND true AND false AND TRUE " +
+                "AND FALSE AND -1 AND 0.0 AND 0 AND 1.0 AND +1.0 AND (hello=\"world\") AND [\"hello\" AND \"world\"] " +
+                "AND (long)123 AND (int)123])))"
     )
 
     override val name = "QUERY_WARMING"

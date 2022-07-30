@@ -6,11 +6,11 @@ object SNQLValue: SNQLElement<Any> {
     // Unlike other decimal regexes, this ensures that we support a state either positive, negative or null (default to positive)
     // and also ensures that the value is of decimal completely (no 0. or 0.0abc or abc0.0).
     val DECIMAL_REGEX = "^(?<value>[+-]?[\\d]*[.]\\b[\\d]*\$)".toRegex()
-    val NUMBER_REGEX = "^([(](?<type>long|int)[)])?(?<value>[-+]?\\d*)\$".toRegex()
+    val NUMBER_REGEX = "^([(](?<type>long|int)[)])?(?<value>[-+]?\\d*)\$".toRegex(RegexOption.IGNORE_CASE)
     val STRING_REGEX = "^\"(?<contents>(?:\\\\\"|.)*?)\"\$".toRegex(setOf(RegexOption.DOT_MATCHES_ALL, RegexOption.IGNORE_CASE))
     val BOOLEAN_REGEX = "^(true|false)$".toRegex(setOf(RegexOption.DOT_MATCHES_ALL, RegexOption.IGNORE_CASE))
 
-    override val REGEX = "^\\{(?<value>.*)}\$".toRegex()
+    override val REGEX = "^(?<value>.*)$".toRegex()
 
     override fun parse(selection: String): Any? {
         // We'll do a strict casing null to ensure that we are getting proper match.
